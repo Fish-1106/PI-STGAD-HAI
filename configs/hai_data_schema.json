@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "dataset": "HAI 21.03",
+  "process": "P1 boiler process",
+  "sampling_frequency_hz": 1,
+  "graph_input": {
+    "node_count": 17,
+    "sensor_count": 8,
+    "actuator_count": 9,
+    "node_order": [
+      {"name": "TIT01", "type": "sensor", "csv_column": "P1_TIT01"},
+      {"name": "TIT02", "type": "sensor", "csv_column": "P1_TIT02"},
+      {"name": "PIT01", "type": "sensor", "csv_column": "P1_PIT01"},
+      {"name": "PIT02", "type": "sensor", "csv_column": "P1_PIT02"},
+      {"name": "FT01", "type": "sensor", "csv_column": "P1_FT01"},
+      {"name": "FT02", "type": "sensor", "csv_column": "P1_FT02"},
+      {"name": "FT03", "type": "sensor", "csv_column": "P1_FT03"},
+      {"name": "LIT01", "type": "sensor", "csv_column": "P1_LIT01"},
+      {"name": "PCV01", "type": "actuator", "csv_column": "P1_PCV01Z"},
+      {"name": "PCV02", "type": "actuator", "csv_column": "P1_PCV02Z"},
+      {"name": "LCV01", "type": "actuator", "csv_column": "P1_LCV01Z"},
+      {"name": "FCV01", "type": "actuator", "csv_column": "P1_FCV01Z"},
+      {"name": "FCV02", "type": "actuator", "csv_column": "P1_FCV02Z"},
+      {"name": "FCV03", "type": "actuator", "csv_column": "P1_FCV03Z"},
+      {"name": "PP01A", "type": "actuator", "csv_column": "P1_PP01AR"},
+      {"name": "PP01B", "type": "actuator", "csv_column": "P1_PP01BR"},
+      {"name": "PP02", "type": "actuator", "csv_column": "P1_PP02R"}
+    ]
+  },
+  "operational_context": {
+    "variable_count": 9,
+    "variables": [
+      {"csv_column": "P1_B2004", "description": "pressure setpoint"},
+      {"csv_column": "P1_B2016", "description": "pressure demand from HIL"},
+      {"csv_column": "P1_B3004", "description": "level setpoint"},
+      {"csv_column": "P1_B3005", "description": "discharge-flow setpoint"},
+      {"csv_column": "P1_B4002", "description": "temperature setpoint"},
+      {"csv_column": "P1_B4022", "description": "temperature demand from HIL"},
+      {"csv_column": "P1_B4005", "description": "temperature-control output"},
+      {"csv_column": "P1_B400B", "description": "heating-water outflow setpoint"},
+      {"csv_column": "P1_STSP", "description": "boiler DCS start/stop state"}
+    ]
+  },
+  "preprocessing": {
+    "normalization_fit_files": ["train1.csv", "train2.csv", "train3.csv"],
+    "normalization_fit_regime": "normal operation",
+    "normalization": "per-variable min-max",
+    "sensor_filter": {
+      "name": "Savitzky-Golay",
+      "applied_to": "eight physical sensor channels",
+      "window_length": 11,
+      "polynomial_order": 3
+    },
+    "downsampling_factor": 1
+  },
+  "windowing": {
+    "input_window_length_seconds": 120,
+    "training_stride_seconds": 60,
+    "testing_stride_seconds": 5,
+    "prediction_horizon_seconds": 1,
+    "target_definition": "normalized 17-node process state immediately after the input window"
+  }
+}

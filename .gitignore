@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+.venv/
+outputs/
+data/hai-21.03/
+.DS_Store

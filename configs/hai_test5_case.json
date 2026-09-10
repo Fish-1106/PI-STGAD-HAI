@@ -1,0 +1,43 @@
+{
+  "dataset": "HAI 21.03",
+  "source_url": "https://github.com/icsdataset/hai/tree/master/hai-21.03",
+  "process": "P1 boiler process",
+  "train_files": ["train1.csv", "train2.csv", "train3.csv"],
+  "test_file": "test5.csv",
+  "seed": 42,
+  "sampling_frequency_hz": 1,
+  "window_size_seconds": 120,
+  "train_stride_seconds": 60,
+  "test_stride_seconds": 5,
+  "experiment_parameters": {
+    "epochs": 180,
+    "batch_size": 128,
+    "learning_rate": 0.001,
+    "learning_rate_schedule": "cosine annealing",
+    "tcn_hidden_dimension": 32,
+    "gat_attention_heads": 4,
+    "gat_per_head_dimension": 32,
+    "operational_context_hidden_dimension": 32,
+    "physics_loss_weight": 0.05,
+    "dropout": 0.3,
+    "early_stopping_patience": 25
+  },
+  "preprocessing": {
+    "sensor_filter": "Savitzky-Golay",
+    "filter_window_length": 11,
+    "filter_polynomial_order": 3,
+    "normalization": "per-variable min-max fitted on normal-operation training files"
+  },
+  "data_schema": "configs/hai_data_schema.json",
+  "graph_config": "configs/hai_graph.json",
+  "case": {
+    "name": "HAI test5 representative diagnostic case",
+    "attack_start": "2020-07-30 18:38:09",
+    "attack_end": "2020-07-30 18:41:31",
+    "plot_padding_before_seconds": 180,
+    "plot_padding_after_seconds": 300
+  },
+  "case_output_artifact": "artifacts/hai_case_artifact_seed42.npz",
+  "figure_operating_point": 1131.8876520019387,
+  "output_stem": "hai_case_study"
+}
