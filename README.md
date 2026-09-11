@@ -93,6 +93,7 @@ outputs, and public files associated with each stage.
 PI-STGAD-HAI/
 ├── README.md
 ├── requirements.txt
+├── environment.yml
 ├── .gitignore
 ├── .gitattributes
 ├── configs/
@@ -116,15 +117,34 @@ PI-STGAD-HAI/
 
 ## Environment
 
-The public workflow was tested with Python 3.12.4 and the dependency versions
-recorded in `requirements.txt`:
+The PI-STGAD experiments were conducted in a Conda-based Python environment.
+The software environment is recorded in [`environment.yml`](environment.yml),
+while [`requirements.txt`](requirements.txt) provides the corresponding Python
+package snapshot. Both files were exported from the environment used for the
+PI-STGAD experiments.
+
+Using Conda:
+
+```bash
+conda env create -f environment.yml
+conda activate pytorch
+```
+
+The recorded environment uses Python 3.10.20, PyTorch 2.7.1+cu118, and
+PyTorch Geometric 2.7.0. The CUDA-related Python packages and their versions
+are retained as recorded in the experimental environment.
+
+For an existing compatible environment, the Python package snapshot can also
+be installed with:
 
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-The scripts use NumPy, pandas, SciPy, and Matplotlib. A GPU is not required for
-the data-preparation, case-analysis, or validation commands in this repository.
+The CUDA-enabled PyTorch wheels use the recorded `+cu118` build tags and may
+require the official PyTorch CUDA 11.8 wheel index when installed on a new
+host. The public data-preparation, case-analysis, and validation commands use
+NumPy, pandas, SciPy, and Matplotlib and do not require a GPU.
 
 ## Data Preparation
 

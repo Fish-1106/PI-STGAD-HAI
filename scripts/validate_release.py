@@ -17,6 +17,7 @@ OUTPUT_DIR = ROOT / "outputs"
 REQUIRED_FILES = [
     ROOT / "README.md",
     ROOT / "requirements.txt",
+    ROOT / "environment.yml",
     ROOT / ".gitignore",
     ROOT / ".gitattributes",
     CONFIG_DIR / "hai_test5_case.json",
